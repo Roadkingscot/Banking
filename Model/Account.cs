@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 namespace Banking
 {
     /// <summary>
@@ -22,6 +23,8 @@ namespace Banking
         private string m_accountNumber;
         private decimal m_balance;
         private IPerson m_customer;
+        private List<ITransaction> m_transactions = new List<ITransaction>();
+
         #endregion
 
         #region IAccount Members
@@ -33,21 +36,37 @@ namespace Banking
         {
             get { return m_balance; }
         }
+        public List<ITransaction> Transactions
+        {
+            get { return m_transactions; }
+        }
         public void Deposit(decimal value)
         {
             m_balance += value;
+            //Now add a transaction
+            m_transactions.Add(new Transaction(m_accountNumber, "C", value, 0, m_balance));
         }
         public void Withdraw(decimal value)
         {
-            m_balance -= value;
+            if (value <= m_balance)
+            {
+                m_balance -= value;
+				//Now add a transaction
+				m_transactions.Add(new Transaction(m_accountNumber, "D", 0, value, m_balance));
+            }
+            else
+            {
+                throw new InsufficientFundsException("Account " + m_accountNumber +
+                                                     " has insuffient funds. Funds available = " + m_balance + "funds requested= " + value);
+            }
         }
         public void Transfer(IAccount account, decimal value)
         {
             decimal curBalance = m_balance;
             try
             {
+				Withdraw(value);
                 account.Deposit(value);
-                Withdraw(value);
                 return;
             }
             catch (Exception ex)

@@ -39,10 +39,14 @@
     <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Customer.cs" />
+    <Compile Include="Exceptions\InsufficientFundsException.cs" />
+    <Compile Include="Interfaces\ITransaction.cs" />
+    <Compile Include="Model\Transaction.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
     <Folder Include="Model\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
