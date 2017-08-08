@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 namespace Banking
 {
+    [Serializable]
     public abstract class Person : IPerson
     {
         #region Constructors

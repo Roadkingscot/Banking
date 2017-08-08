@@ -6,6 +6,7 @@ namespace Banking
     /// <summary>
     /// Account. Abstract class that implements the IAccount interface
     /// </summary>
+    [Serializable]
     public abstract class Account : IAccount
     {
         #region Constuctors
