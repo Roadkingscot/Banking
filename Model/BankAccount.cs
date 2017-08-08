@@ -1,6 +1,7 @@
 ﻿using System;
 namespace Banking
 {
+	[Serializable]
     public class BankAccount : Account
     {
         #region Constructor
